@@ -69,6 +69,8 @@ df['Cd'] = results.apply(lambda x: x['Cd'])
 df['PLI'] = results.apply(lambda x: x['PLI'])
 
 # Write the updated DataFrame to output.csv
-output_columns = ['Sample_ID', 'Latitude', 'Longitude', 'HPI', 'HEI', 'MPI', 'Cd', 'PLI']
+base_columns = ['Sample_ID', 'Latitude', 'Longitude']
+existing_base = [col for col in base_columns if col in df.columns]
+output_columns = existing_base + ['HPI', 'HEI', 'MPI', 'Cd', 'PLI']
 df[output_columns].to_csv('output.csv', index=False)
 
