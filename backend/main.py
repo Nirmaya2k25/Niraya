@@ -1,5 +1,8 @@
+from flask import Flask, request, jsonify
 import pandas as pd
 import numpy as np
+
+app = Flask(__name__)
 
 # --- Default permissible limits (BIS/WHO, mg/L) ---
 STANDARDS = {
@@ -57,20 +60,29 @@ def calculate_indices(measured: dict):
         "Weights": weights
     }
 
-# Read the input CSV
-df = pd.read_csv('sample.csv')
+@app.route('/process-csv', methods=['POST'])
+def process_csv():
+    file = request.files['file']
+    df = pd.read_csv(file)
 
-# Calculate indices for each row and add as new columns
-results = df.apply(lambda row: calculate_indices({metal: row[metal] for metal in STANDARDS if metal in row}), axis=1)
-df['HPI'] = results.apply(lambda x: x['HPI'])
-df['HEI'] = results.apply(lambda x: x['HEI'])
-df['MPI'] = results.apply(lambda x: x['MPI'])
-df['Cd'] = results.apply(lambda x: x['Cd'])
-df['PLI'] = results.apply(lambda x: x['PLI'])
+    # Calculate indices for each row and add as new columns
+    results = df.apply(lambda row: calculate_indices({metal: row[metal] for metal in STANDARDS if metal in row}), axis=1)
+    df['HPI'] = results.apply(lambda x: x['HPI'])
+    df['HEI'] = results.apply(lambda x: x['HEI'])
+    df['MPI'] = results.apply(lambda x: x['MPI'])
+    df['Cd'] = results.apply(lambda x: x['Cd'])
+    df['PLI'] = results.apply(lambda x: x['PLI'])
 
-# Write the updated DataFrame to output.csv
-base_columns = ['Sample_ID', 'Latitude', 'Longitude']
-existing_base = [col for col in base_columns if col in df.columns]
-output_columns = existing_base + ['HPI', 'HEI', 'MPI', 'Cd', 'PLI']
-df[output_columns].to_csv('output.csv', index=False)
+    # Write the updated DataFrame to output.csv
+    base_columns = ['Sample_ID', 'Latitude', 'Longitude']
+    existing_base = [col for col in base_columns if col in df.columns]
+    output_columns = existing_base + ['HPI', 'HEI', 'MPI', 'Cd', 'PLI']
+    df[output_columns].to_csv('output.csv', index=False)
+
+    # Return results as JSON
+    result = df.to_dict(orient='records')
+    return jsonify(result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
