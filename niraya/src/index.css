@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* NIRMAYA Design System - Environmental Science Platform */
+
+@layer base {
+  :root {
+    /* Base colors - Clean scientific aesthetic */
+    --background: 210 20% 98%;
+    --foreground: 215 25% 15%;
+
+    /* Card system */
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 15%;
+
+    /* Popover */
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 15%;
+
+    /* Primary - Deep ocean blue for trust and water theme */
+    --primary: 203 89% 24%;
+    --primary-foreground: 210 40% 98%;
+    --primary-hover: 203 89% 20%;
+
+    /* Secondary - Light blue-gray for subtle elements */
+    --secondary: 210 30% 96%;
+    --secondary-foreground: 215 25% 25%;
+
+    /* Muted elements */
+    --muted: 210 30% 94%;
+    --muted-foreground: 215 15% 50%;
+
+    /* Accent - Teal for highlights */
+    --accent: 180 84% 17%;
+    --accent-foreground: 180 84% 85%;
+
+    /* Status colors for pollution levels */
+    --safe: 142 71% 45%;        /* Forest green for safe levels */
+    --safe-foreground: 0 0% 100%;
+    --moderate: 38 92% 50%;     /* Amber for moderate pollution */
+    --moderate-foreground: 0 0% 100%;
+    --unsafe: 0 84% 60%;        /* Coral red for dangerous levels */
+    --unsafe-foreground: 0 0% 100%;
+
+    /* System colors */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 203 89% 24%;
+
+    /* Gradients for visual impact */
+    --gradient-primary: linear-gradient(135deg, hsl(203 89% 24%), hsl(180 84% 17%));
+    --gradient-status: linear-gradient(90deg, hsl(142 71% 45%), hsl(38 92% 50%), hsl(0 84% 60%));
+    
+    /* Shadows for depth */
+    --shadow-soft: 0 2px 10px -2px hsl(203 89% 24% / 0.1);
+    --shadow-medium: 0 4px 20px -4px hsl(203 89% 24% / 0.15);
+    
+    /* Animation durations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 215 28% 6%;
+    --foreground: 210 40% 98%;
+
+    --card: 215 28% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 215 28% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 180 84% 17%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 180 84% 15%;
+
+    --secondary: 215 25% 12%;
+    --secondary-foreground: 210 40% 85%;
+
+    --muted: 215 25% 10%;
+    --muted-foreground: 215 15% 55%;
+
+    --accent: 203 89% 24%;
+    --accent-foreground: 180 84% 85%;
+
+    --safe: 142 71% 35%;
+    --safe-foreground: 0 0% 100%;
+    --moderate: 38 92% 45%;
+    --moderate-foreground: 0 0% 100%;
+    --unsafe: 0 84% 55%;
+    --unsafe-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 25% 12%;
+    --input: 215 25% 12%;
+    --ring: 203 89% 24%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  .container {
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
